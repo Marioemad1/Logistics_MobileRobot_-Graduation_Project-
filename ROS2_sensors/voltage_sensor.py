@@ -15,7 +15,7 @@ class VoltageStatusNode(Node):
         self.publisher_ = self.create_publisher(Bool, 'is_voltage_present', 10)
         
         # Check every 0.1 seconds (10Hz)
-        self.timer = self.create_timer(0.1, self.timer_callback)
+        self.timer = self.create_timer(1.0, self.timer_callback)
         self.get_logger().info("Binary Voltage Detector (via Level Shifter) is running...")
 
     def timer_callback(self):
