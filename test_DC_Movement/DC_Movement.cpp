@@ -21,8 +21,7 @@ RobotDrivetrain::RobotDrivetrain(int L_lpwm, int L_rpwm, int R_lpwm, int R_rpwm)
     _R_LPWM_PIN = R_lpwm;
     _R_RPWM_PIN = R_rpwm;
     
-    // Channel variables (_L_L_CHANNEL etc.) from .hpp are no longer needed 
-    // in this version, so we simply ignore them here.
+  
 }
 
 // --- init() ---
