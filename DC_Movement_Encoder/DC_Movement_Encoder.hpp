@@ -359,6 +359,21 @@ public:
      */
     void rightEncoderISR();
 
+    //  Differential drive kinematics
+    void twistToPWM(float linear_x, float angular_z,
+                    float wheelbase, float max_linear_speed,
+                    int* pwmValues);
+
+
+    void setLeftMotor(int speed);
+    
+    /**
+     * Control right motor directly
+     * @param speed : -255 to +255
+     */
+    void setRightMotor(int speed);
+
+    
 private:
     /*********************************************************************************
      * PRIVATE MOTOR CONTROL FUNCTIONS
@@ -375,13 +390,6 @@ private:
      * - If speed < 0: Set LPWM = 0, RPWM = abs(speed)
      * - If speed = 0: Set LPWM = 0, RPWM = 0 (coast to stop)
      */
-    void setLeftMotor(int speed);
-    
-    /**
-     * Control right motor directly
-     * @param speed : -255 to +255
-     */
-    void setRightMotor(int speed);
 
     /*********************************************************************************
      * PRIVATE MEMBER VARIABLES

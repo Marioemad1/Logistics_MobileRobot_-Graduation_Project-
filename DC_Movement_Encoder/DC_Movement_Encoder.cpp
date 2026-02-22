@@ -614,4 +614,57 @@ void RobotDrivetrain::setPIDGains(float kp, float ki, float kd)
     // robot.setPIDGains(1.2, 0.02, 0.15);  // More aggressive tuning
 }
 
+
+/*********************************************************************************
+ * TWIST TO PWM CONVERSION
+ * Converts ROS2 Twist message (linear + angular velocity) to motor PWM values
+ * 
+ * Parameters:
+ *   linear_x         : Forward/backward velocity from Twist.linear.x (m/s)
+ *   angular_z        : Rotation velocity from Twist.angular.z (rad/s)
+ *   wheelbase        : Distance between wheels (meters)
+ *   max_linear_speed : Maximum linear velocity your robot can achieve (m/s)
+ *   pwmValues        : Output array [left_pwm, right_pwm]
+ *********************************************************************************/
+void RobotDrivetrain::twistToPWM(float linear_x, float angular_z,
+                                  float wheelbase, float max_linear_speed,
+                                  int* pwmValues)
+{
+    // === DIFFERENTIAL DRIVE KINEMATICS ===
+    // For a two-wheeled robot:
+    // v_left  = v - ω×L/2  (left wheel moves slower when turning right)
+    // v_right = v + ω×L/2  (right wheel moves faster when turning right)
+    
+    float v_left  = linear_x - (angular_z * wheelbase / 2.0);
+    float v_right = linear_x + (angular_z * wheelbase / 2.0);
+    
+    // Example:
+    // linear_x = 0.5 m/s (moving forward)
+    // angular_z = 0.2 rad/s (turning right)
+    // wheelbase = 0.3 m
+    // v_left  = 0.5 - (0.2 × 0.15) = 0.47 m/s
+    // v_right = 0.5 + (0.2 × 0.15) = 0.53 m/s
+    
+    // === NORMALIZE TO PWM RANGE (-255 to +255) ===
+    // Convert velocity (m/s) to PWM duty cycle
+    // max_linear_speed represents 255 PWM
+    
+    int left_pwm  = (int)((v_left  / max_linear_speed) * 255.0);
+    int right_pwm = (int)((v_right / max_linear_speed) * 255.0);
+    
+    // Example (continued):
+    // If max_linear_speed = 1.0 m/s:
+    // left_pwm  = (0.47 / 1.0) × 255 = 120
+    // right_pwm = (0.53 / 1.0) × 255 = 135
+    
+    // === CONSTRAIN TO VALID PWM RANGE ===
+    // Prevent values from exceeding motor driver limits
+    left_pwm  = constrain(left_pwm,  -255, 255);
+    right_pwm = constrain(right_pwm, -255, 255);
+    
+    // === STORE RESULTS IN OUTPUT ARRAY ===
+    pwmValues[0] = left_pwm;   // Left motor PWM
+    pwmValues[1] = right_pwm;  // Right motor PWM
+}
+
 // === END OF IMPLEMENTATION FILE ===
