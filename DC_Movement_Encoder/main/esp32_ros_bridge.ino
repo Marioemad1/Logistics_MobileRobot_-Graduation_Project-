@@ -14,7 +14,7 @@
  *   - Message: {"linear":0.5,"angular":0.2}
  *********************************************************************************/
 
-#include <ArduinoJson.h>  // IMPORTANT: Install this library first!
+#include <ArduinoJson.h>  // IMPORTANT:WE need to Install this library 
 #include "DC_Movement_Encoder.hpp"
 
 // ========== CONFIGURATION ==========
