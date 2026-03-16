@@ -12,7 +12,7 @@ class UltraSonicSensor(Node): #create the class and inharet from node
         super().__init__("ultra_sonic_sensor") #call the init from the Node class 
        #parameter configuration
         self.declare_parameter("trig_pin", 17 ) #this is BCM -> GPIO17 Physical 11
-        self.declare_parameter("echo_pin", 13 )#this is BCM-> GPIO27 Physical 13
+        self.declare_parameter("echo_pin", 13 )#this is BCM-> GPIO13 Physical 33
         self.declare_parameter("hz_timer", 0.1)
         self.declare_parameter("time_out",0.03)
         self.declare_parameter("frame_id","ultrasonic_link")
