@@ -1,0 +1,9 @@
+<library path="hw_interface">
+    <class name="mpu6050_hardware/Mpu6050HardwareInterface"
+           type="mpu6050_hardware::Mpu6050HardwareInterface"
+           base_class_type="hardware_interface::SystemInterface">
+        <description>
+            Hardware interface for MPU6050 sensor
+        </description>
+    </class>
+</library>
