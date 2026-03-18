@@ -1,0 +1,210 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+
+    <!-- <link name="imu_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://package_name/meshes/mesh.stl" />
+            </geometry>
+            <material name="Blue_tech"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.0 0.0 0.0"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="1.0" />
+            <origin xyz="0 0 0" />
+            <inertia ixx="1.0" ixy="0.0" ixz="0.0"
+                     iyy="1.0" iyz="0.0"
+                     izz="1.0" />
+        </inertial>
+    </link> -->
+
+
+    <link name="Camera_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5708 -0.87266 0" />
+            <geometry>
+                <mesh filename="package://robot_description/meshes/CAMRAS.STL" />
+            </geometry>
+            <material name="Blue_tech"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.0 0.0 0.0"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.00661422961856379" />
+            <origin xyz="0 0 0" />
+            <inertia ixx="0.00000026238959561215" ixy="5.1351372427292E-021" ixz="8.28770144570259E-022"
+                     iyy="0.00000140030188192852" iyz="-2.48138686021216E-023"
+                     izz="0.00000141481758097034" />
+        </inertial>
+    </link>
+
+    <link name="scan_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5708 0 -1.5708" />
+            <geometry>
+                <mesh filename="package://robot_description/meshes/LIDAR.STL" />
+            </geometry>
+            <material name="Black_wheels"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0 0 0" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.0509760361388544" />
+            <origin xyz="0 0 0" />
+            <inertia ixx="0.0000100879171025046" ixy="0.00000001034020018237" ixz="0.00000004137562832679"
+                     iyy="0.0000146859205832974" iyz="-0.00000004240420956506"
+                     izz="0.0000117806458816188" />
+        </inertial>
+    </link>
+
+    <link name="ultra1_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 -0.785398163397444" />
+            <geometry>
+                <mesh filename="package://robot_description/meshes/ULTRASONIC1.STL" />
+            </geometry>
+            <material name="Blue_tech"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.0 0.0 0.0"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.00661422961856379" />
+            <origin xyz="0 0 0" />
+            <inertia ixx="0.00000026238959561215" ixy="5.1351372427292E-021" ixz="8.28770144570259E-022"
+                     iyy="0.00000140030188192852" iyz="-2.48138686021216E-023"
+                     izz="0.00000141481758097034" />
+        </inertial>
+    </link>
+
+    <link name="ultra2_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 2.35619449019235" />
+            <geometry>
+                <mesh filename="package://robot_description/meshes/ULTRASONIC1.STL" />
+            </geometry>
+            <material name="Blue_tech"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.0 0.0 0.0"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.00661422961856379" />
+            <origin xyz="0 0 0" />
+            <inertia ixx="0.00000026238959561215" ixy="5.1351372427292E-021" ixz="8.28770144570259E-022"
+                     iyy="0.00000140030188192852" iyz="-2.48138686021216E-023"
+                     izz="0.00000141481758097034" />
+        </inertial>
+    </link>
+
+    <link name="ultra3_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="3.14159265358979 0 -2.35619449019235" />
+            <geometry>
+                <mesh filename="package://robot_description/meshes/ULTRASONIC1.STL" />
+            </geometry>
+            <material name="Blue_tech"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.0 0.0 0.0"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.00661422961856379" />
+            <origin xyz="0 0 0" />
+            <inertia ixx="0.00000026238959561215" ixy="5.1351372427292E-021" ixz="8.28770144570259E-022"
+                     iyy="0.00000140030188192852" iyz="-2.48138686021216E-023"
+                     izz="0.00000141481758097034" />
+        </inertial>
+    </link>
+
+    <link name="ultra4_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="-3.14159265358979 0 0.785398163397446" />
+            <geometry>
+                <mesh filename="package://robot_description/meshes/ULTRASONIC1.STL" />
+            </geometry>
+            <material name="Blue_tech"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.0 0.0 0.0"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.00661422961856379" />
+            <origin xyz="0 0 0" />
+            <inertia ixx="0.00000026238959561215" ixy="5.1351372427292E-021" ixz="8.28770144570259E-022"
+                     iyy="0.00000140030188192852" iyz="-2.48138686021216E-023"
+                     izz="0.00000141481758097034" />
+        </inertial>
+    </link>
+
+
+
+
+
+    <joint name="base_camera_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="Camera_link"/>
+        <origin xyz="0.35641 0.0 0.19554" rpy="0.0 0.0 0.0"/>
+    </joint>
+
+    <joint name="base_scan_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="scan_link"/>
+        <origin xyz="0.344 0.0 0.014" rpy="0.0 0.0 0.0"/>
+    </joint>
+
+    <joint name="nase_ultra1_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="ultra1_link"/>
+        <origin xyz="0.344057611844581 0.245757611844575 0.122" rpy="0.0 0.0 0.0"/>
+    </joint>
+
+    <joint name="nase_ultra2_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="ultra2_link"/>
+        <origin xyz="-0.344057611844581 -0.245757611844575 0.122" rpy="0.0 0.0 0.0"/>
+    </joint>
+
+    <joint name="nase_ultra3_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="ultra3_link"/>
+        <origin xyz="-0.344057611844581 0.245757611844575 0.122" rpy="0.0 0.0 0.0"/>
+    </joint>
+
+    <joint name="nase_ultra4_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="ultra4_link"/>
+        <origin xyz="0.344057611844581 -0.245757611844575 0.122" rpy="0.0 0.0 0.0"/>
+    </joint>
+    
+    
+    
+    
+</robot>

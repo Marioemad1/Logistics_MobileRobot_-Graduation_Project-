@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <link name="right_wheel_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/meshes/WHEELRIGHT.STL" />
+            </geometry>
+            <material name="Black_wheels"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <cylinder radius="0.0" length="0.0"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.27052" />
+            <origin xyz="0 0 0" />
+            <inertia ixx="0.00020379" ixy="1.8231E-022" ixz="-1.0447E-037"
+                     iyy="0.00036168" iyz="6.2575E-022"
+                     izz="0.00020379" />
+        </inertial>
+    </link>
+
+    <link name="left_wheel_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/meshes/WHEELRIGHT.STL" />
+            </geometry>
+            <material name="Black_wheels"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <cylinder radius="0.0" length="0.0"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.27052" />
+            <origin xyz="0 0 0" />
+            <inertia ixx="0.00020379" ixy="1.8231E-022" ixz="-1.0447E-037"
+                     iyy="0.00036168" iyz="6.2575E-022"
+                     izz="0.00020379" />
+        </inertial>
+    </link>
+
+
+    <link name="front_caster_wheel_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <sphere radius="0.0079275"/>
+            </geometry>
+            <material name="Black_wheels"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <sphere radius="0.0079275"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="back_caster_wheel_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <sphere radius="0.0079275"/>
+            </geometry>
+            <material name="Black_wheels"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <sphere radius="0.0079275"/>
+            </geometry>
+        </collision>
+    </link>
+
+
+    <joint name="base_right_wheel_joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="right_wheel_link"/>
+        <axis xyz="0 1 0"/>
+        <origin xyz="0.00031675 -0.243 0.034145" rpy="0 0 0"/>
+    </joint>
+
+    <joint name="base_left_wheel_joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="left_wheel_link"/>
+        <axis xyz="0 1 0"/>
+        <origin xyz="0.00031675 0.243 0.034145" rpy="0 0 0"/>
+    </joint>
+
+    <joint name="base_caster_front_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="front_caster_wheel_link"/>
+        <origin xyz="0.344 0.0 -0.0094275" rpy="0.0 0.0 0.0"/>
+    </joint>
+
+    <joint name="base_caster_back_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="back_caster_wheel_link"/>
+        <origin xyz="-0.344 0.0 -0.0094275" rpy="0.0 0.0 0.0"/>
+    </joint>
+    
+    
+    
+</robot>

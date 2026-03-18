@@ -1,0 +1,215 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <link name="base_footprint">
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    </link>
+
+    <link name="base_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/meshes/base_link.STL" />
+            </geometry>
+            <material name="Grey_body"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.0 0.0 0.0"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="6.1834389040098" />
+            <origin xyz="0 0 0" />
+            <inertia ixx="0.172811693426198" ixy="0.000287772429697471" ixz="0.000146852915258599" 
+                     iyy="0.329853029043022" iyz="-0.0000005106111186954"
+                     izz="0.0" />
+        </inertial>
+    </link>
+
+    <link name="front_side_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5708 0 -1.5708" />
+            <geometry>
+                <mesh filename="package://robot_description/meshes/FRONTFACE.STL"/>
+            </geometry>
+            <material name="Grey_body"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.0 0.0 0.0"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.943263635545501" />
+            <origin xyz="0 0 0" />
+            <inertia ixx="0.00291641918840626" ixy="0.0000190996145270648" ixz="0.00000071419602127283" 
+                     iyy="0.0" iyz="0.000034925471644662"
+                     izz="0.0169244457647262" />
+        </inertial>
+    </link>
+
+    <link name="back_side_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="-1.5708 0 1.5708" />
+            <geometry>
+                <mesh filename="package://robot_description/meshes/BACKFACE.STL"/>
+            </geometry>
+            <material name="Grey_body"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.0 0.0 0.0"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="1.21964784215122" />
+            <origin xyz="0 0 0" />
+            <inertia ixx="0.00351494178324154" ixy="-0.000000012069310846" ixz="0.00000002879626633959" 
+                     iyy="0.0" iyz="-0.00000087575048906592"
+                     izz="0.0" />
+        </inertial>
+    </link>
+
+
+    <link name="right_side_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5708 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/meshes/RIGHTSIDE.STL"/>
+            </geometry>
+            <material name="Blue_body"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.0 0.0 0.0"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="2.59245784828295" />
+            <origin xyz="0 0 0" />
+            <inertia ixx="0.0097385527877872" ixy="0.0000705335602570311" ixz="0.000535987354813434" 
+                     iyy="0.16832306413205" iyz="0.0000107962961975476"
+                     izz="0.173820773325926" />
+        </inertial>
+    </link>
+
+    <link name="left_side_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5708 0 3.1416" />
+            <geometry>
+                <mesh filename="package://robot_description/meshes/LEFTSIDE.STL"/>
+            </geometry>
+            <material name="Blue_body"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.0 0.0 0.0"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="2.59245784828295" />
+            <origin xyz="0 0 0" />
+            <inertia ixx="0.0097385527877872" ixy="0.0000705335602570311" ixz="0.000535987354813434" 
+                     iyy="0.16832306413205" iyz="0.0000107962961975476"
+                     izz="0.173820773325926" />
+        </inertial>
+    </link>
+
+    <link name="flange_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5708 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/meshes/FLANGE.STL"/>
+            </geometry>
+            <material name="Blue_body"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.0 0.0 0.0"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="4.55743149884064" />
+            <origin xyz="0 0 0" />
+            <inertia ixx="0.224259288011278" ixy="0.0000146668870126123" ixz="-0.00000045139077650599" 
+                     iyy="0.0" iyz="-6.30334977764897E-016"
+                     izz="0.0" />
+        </inertial>
+    </link>
+
+    <link name="top_lift_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5707963267949 0 3.14159265358979" />
+            <geometry>
+                <mesh filename="package://robot_description/meshes/TOPBASE.STL"/>
+            </geometry>
+            <material name="Grey_body"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.0 0.0 0.0"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="4.55743149884064" />
+            <origin xyz="0 0 0" />
+            <inertia ixx="0.224259288011278" ixy="0.0000146668870126123" ixz="-0.00000045139077650599" 
+                     iyy="0.0" iyz="-6.30334977764897E-016"
+                     izz="0.0" />
+        </inertial>
+    </link>
+
+
+
+    <joint name="base_base_joint" type="fixed">
+        <parent link="base_footprint"/>
+        <child link="base_link"/>
+        <origin xyz="0.0 0.0 0.015855" rpy="0.0 0.0 0.0"/>
+    </joint>
+
+    <joint name="base_front_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="front_side_link"/>
+        <origin xyz="0.388 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    </joint>
+
+    <joint name="base_back_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="back_side_link"/>
+        <origin xyz="-0.388 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    </joint>
+
+    <joint name="base_right_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="right_side_link"/>
+        <origin xyz=" 0.0 -0.2902 0.161" rpy="0.0 0.0 0.0"/>
+    </joint>
+
+    <joint name="base_left_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="left_side_link"/>
+        <origin xyz=" 0.0 0.2902 0.161" rpy="0.0 0.0 0.0"/>
+    </joint>
+
+    <joint name="base_flange_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="flange_link"/>
+        <origin xyz="-0.00073426 -0.00062835 0.163" rpy="0.0 0.0 0.0"/>
+    </joint>
+
+    <joint name="base_top_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="top_lift_link"/>
+        <origin xyz="0.0 0.0 0.2374" rpy="0.0 0.0 0.0"/>
+    </joint>
+    
+
+</robot>
