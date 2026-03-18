@@ -47,6 +47,7 @@ public:
       std::chrono::milliseconds(100),
       std::bind(&UltrasonicNode::timer_callback, this));
 
+    RCLCPP_INFO(this->get_logger(),"Pins is Clamid...");
     RCLCPP_INFO(this->get_logger(), "Ultrasonic node started (trig=%d, echo=%d)", trig_pin_, echo_pin_);
   }
 
