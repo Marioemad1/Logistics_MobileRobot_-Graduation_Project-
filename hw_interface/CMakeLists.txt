@@ -18,7 +18,11 @@ if(NOT LGPIO_LIBRARY)
 endif()
 
 add_executable(ultrasonic_sensor src/ultrasonic_sensor.cpp)
-ament_target_dependencies(ultrasonic_sensor rclcpp sensor_msgs )
+ament_target_dependencies(ultrasonic_sensor rclcpp sensor_msgs)
+
+add_executable(battery_pr_adc_vol src/battery_pr_adc_vol.cpp)
+ament_target_dependencies(battery_pr_adc_vol rclcpp)
+
 
 target_link_libraries(ultrasonic_sensor ${LGPIO_LIBRARY})
 
@@ -37,6 +41,7 @@ pluginlib_export_plugin_description_file(hardware_interface mpu6050_hardware_int
 install(TARGETS ${PROJECT_NAME}
 #don't forget to add the nodes in the targets
 ultrasonic_sensor
+battery_pr_adc_vol
 DESTINATION lib/${PROJECT_NAME}
 
 )
