@@ -3,6 +3,8 @@
 
 #include "hardware_interface/system_interface.hpp"
 #include "hw_interface/mpu6050_driver.hpp"
+#include <memory>
+#include <vector>
 
 
 namespace mpu6050_hardware
@@ -42,6 +44,12 @@ public:
 private:
 
     std::shared_ptr<MPU6050Driver> driver_;
+    const char* bus_;
+    int address_;
+
+    // These are the variables the controller will read every cycle
+    double linear_acceleration_[3] = {0.0, 0.0, 0.0};   // m/s²
+    double angular_velocity_[3]    = {0.0, 0.0, 0.0};   // rad/s
 
 }; //class
 

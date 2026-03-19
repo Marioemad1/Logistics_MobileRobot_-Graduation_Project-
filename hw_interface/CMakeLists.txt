@@ -34,7 +34,7 @@ ament_target_dependencies(${PROJECT_NAME} rclcpp rclcpp_lifecycle hardware_inter
 
 pluginlib_export_plugin_description_file(hardware_interface mpu6050_hardware_interface.xml)
 
-install(TARGETS 
+install(TARGETS ${PROJECT_NAME}
 #don't forget to add the nodes in the targets
 ultrasonic_sensor
 DESTINATION lib/${PROJECT_NAME}

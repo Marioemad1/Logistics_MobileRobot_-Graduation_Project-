@@ -12,6 +12,10 @@ hardware_interface::CallbackReturn Mpu6050HardwareInterface::on_init
         return hardware_interface::CallbackReturn::ERROR;
     }
 
+    address_ = 0x68;
+    bus_= "/dev/i2c-1";
+
+    driver_ = std::make_shared<MPU6050Driver>(bus_,address_);
     return hardware_interface::CallbackReturn::SUCCESS;
     
 }
@@ -21,11 +25,30 @@ std::vector<hardware_interface::StateInterface> Mpu6050HardwareInterface::export
 {
     std::vector<hardware_interface::StateInterface> states;
 
+    std::string sensor_name_link = "imu_link"; //LINK URDF
 
-    //right wheel position and velocity
-   /*  states.emplace_back(
+
+    //linear acceleration
+    states.emplace_back(
         hardware_interface::StateInterface(
-            "base_right_wheel_joint","position",&hw_right_position_)); */
+            sensor_name_link,"linear_acceleration.x",&linear_acceleration_[0]));
+    states.emplace_back(
+            hardware_interface::StateInterface(
+                sensor_name_link,"linear_acceleration.y",&linear_acceleration_[1]));
+    states.emplace_back(
+            hardware_interface::StateInterface(
+                sensor_name_link,"linear_acceleration.z",&linear_acceleration_[2]));
+
+    //anguler acceleration
+    states.emplace_back(
+        hardware_interface::StateInterface(
+            sensor_name_link,"anguler_acceleration.x",&angular_velocity_[0]));
+    states.emplace_back(
+            hardware_interface::StateInterface(
+                sensor_name_link,"anguler_acceleration.y",&angular_velocity_[1]));
+    states.emplace_back(
+            hardware_interface::StateInterface(
+                sensor_name_link,"anguler_acceleration.z",&angular_velocity_[2]));
 
     return states;
 
@@ -33,13 +56,7 @@ std::vector<hardware_interface::StateInterface> Mpu6050HardwareInterface::export
 
 std::vector<hardware_interface::CommandInterface> Mpu6050HardwareInterface::export_command_interfaces()
 {
-    std::vector<hardware_interface::CommandInterface> commands;
-
-    /* commands.emplace_back(
-        hardware_interface::CommandInterface(
-            "base_right_wheel_joint","velocity",&cmd_right_velocity_)); */
-
-    return commands;
+    return{}; //no write here 
 
 }
 
@@ -47,7 +64,7 @@ hardware_interface::CallbackReturn Mpu6050HardwareInterface::on_configure
     (const rclcpp_lifecycle::State & previous_state)
 {
     (void)previous_state;
-    if (driver_->init() == 0)
+    if (!driver_->init())
     {
         return hardware_interface::CallbackReturn::ERROR;
     }
@@ -76,7 +93,19 @@ hardware_interface::return_type Mpu6050HardwareInterface::read
     (void)time;
     (void)period;
 
+    MPU6050DATA mpu_comming_data = driver_->readData();
 
+    //update the accleration in linear
+    linear_acceleration_[0] = mpu_comming_data.accel_x;
+    linear_acceleration_[1] = mpu_comming_data.accel_y;
+    linear_acceleration_[2] = mpu_comming_data.accel_z;
+
+
+    //update the anguler velcoity
+    angular_velocity_[0]= mpu_comming_data.gyro_x ;
+    angular_velocity_[1]= mpu_comming_data.gyro_y ;
+    angular_velocity_[2]= mpu_comming_data.gyro_z ;
+    
     return hardware_interface::return_type::OK;
 
 }
