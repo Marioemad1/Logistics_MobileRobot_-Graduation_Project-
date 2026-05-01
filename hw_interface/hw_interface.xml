@@ -1,0 +1,26 @@
+<library path="hw_interface">
+    <class name="mobile_base_hardware/MobileBaseHardWare"
+           type="mobile_base_hardware::MobileBaseHardWare"
+           base_class_type="hardware_interface::SystemInterface">
+        <description>
+            Hardware interface for a mobile base 
+        </description>
+    </class>
+
+    <!-- <class name="mpu6050_hardware/Mpu6050HardwareInterface"
+           type="mpu6050_hardware::Mpu6050HardwareInterface"
+           base_class_type="hardware_interface::SystemInterface">
+        <description>
+            Hardware interface for MPU6050 sensor
+        </description>
+    </class> --> 
+
+    <!-- <class name="led_blink_test/LedBlinkTest"
+           type="led_blink_test::LedBlinkTest"
+           base_class_type="hardware_interface::SystemInterface">
+        <description>
+            hardware to blink the blue led in the esp32
+        </description>
+    </class> -->
+
+</library>

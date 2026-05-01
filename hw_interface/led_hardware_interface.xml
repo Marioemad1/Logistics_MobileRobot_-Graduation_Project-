@@ -1,0 +1,9 @@
+<library path="hw_interface">
+    <class name="led_blink_test/LedBlinkTest"
+           type="led_blink_test::LedBlinkTest"
+           base_class_type="hardware_interface::SystemInterface">
+        <description>
+            hardware to blink the blue led in the esp32
+        </description>
+    </class>
+</library>

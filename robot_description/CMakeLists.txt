@@ -7,8 +7,13 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-install(
-  DIRECTORY urdf launch rviz2 meshes 
+
+# Install directories
+install(DIRECTORY 
+  urdf 
+  launch 
+  rviz2 
+  meshes 
   DESTINATION share/${PROJECT_NAME}/
 )
 

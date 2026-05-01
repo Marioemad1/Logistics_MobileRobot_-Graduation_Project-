@@ -4,6 +4,10 @@ from rclpy.node import Node
 from sensor_msgs.msg import Image
 from geometry_msgs.msg import Twist
 from cv_bridge import CvBridge
+from nav2_simple_commander.robot_navigator import BasicNavigator
+from geometry_msgs.msg import PoseStamped
+import tf_transformations
+
 import cv2
 from ultralytics import YOLO
 
@@ -26,6 +30,23 @@ class StandAligner(Node): #create the class and inharet from node
         self.k_angular = 0.005  # proportional constant for rotation    
 
         self.get_logger().info("the model node is detecting.....")
+
+    def create_goal_stamp( self, navigation : BasicNavigator, x,y,z):
+        q_x,q_y,q_z,q_w = tf_transformations.quaternion_from_euler(0.0,0.0,z)
+        
+        #---------------send the robot position---------------------
+        target_pose = PoseStamped()
+        target_pose.header.frame_id = 'map'
+        target_pose.header.stamp= navigation.get_clock().now().to_msg()
+        target_pose.pose.position.x = x
+        target_pose.pose.position.y = y
+        target_pose.pose.position.z = 0.0
+        target_pose.pose.orientation.x = q_x
+        target_pose.pose.orientation.y = q_y
+        target_pose.pose.orientation.w = q_z
+        target_pose.pose.orientation.z = q_w
+        
+        return target_pose
 
 
     def image_box_detection(self, image : Image):

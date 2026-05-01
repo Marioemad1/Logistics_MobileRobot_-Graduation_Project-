@@ -10,8 +10,9 @@
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
                 <mesh filename="package://robot_description/meshes/base_link.STL" />
+                 <!-- <box size="0.1 0.1 0.1"/> -->
             </geometry>
-            <material name="Grey_body"/>
+            <material name="Black_wheels"/>
         </visual>
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0" />
@@ -22,9 +23,9 @@
         <inertial>
             <mass value="6.1834389040098" />
             <origin xyz="0 0 0" />
-            <inertia ixx="0.172811693426198" ixy="0.000287772429697471" ixz="0.000146852915258599" 
+            <inertia ixx="0.172811693426198" ixy="0.172811693426198" ixz="0.000146852915258599" 
                      iyy="0.329853029043022" iyz="-0.0000005106111186954"
-                     izz="0.0" />
+                     izz="0.502514023614247" />
         </inertial>
     </link>
 
@@ -37,7 +38,7 @@
             <material name="Grey_body"/>
         </visual>
         <collision>
-            <origin xyz="0 0 0" rpy="0 0 0" />
+            <origin xyz="0 0 0" rpy="1.5708 0 -1.5708" />
             <geometry>
                 <box size="0.0 0.0 0.0"/>
             </geometry>
@@ -46,7 +47,7 @@
             <mass value="0.943263635545501" />
             <origin xyz="0 0 0" />
             <inertia ixx="0.00291641918840626" ixy="0.0000190996145270648" ixz="0.00000071419602127283" 
-                     iyy="0.0" iyz="0.000034925471644662"
+                     iyy="0.0140654484607705" iyz="0.000034925471644662"
                      izz="0.0169244457647262" />
         </inertial>
     </link>
@@ -69,8 +70,8 @@
             <mass value="1.21964784215122" />
             <origin xyz="0 0 0" />
             <inertia ixx="0.00351494178324154" ixy="-0.000000012069310846" ixz="0.00000002879626633959" 
-                     iyy="0.0" iyz="-0.00000087575048906592"
-                     izz="0.0" />
+                     iyy="0.0164769667498377" iyz="-0.00000087575048906592"
+                     izz="0.352922362443128" />
         </inertial>
     </link>
 
@@ -81,7 +82,7 @@
             <geometry>
                 <mesh filename="package://robot_description/meshes/RIGHTSIDE.STL"/>
             </geometry>
-            <material name="Blue_body"/>
+            <material name="Black_wheels"/>
         </visual>
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0" />
@@ -104,7 +105,7 @@
             <geometry>
                 <mesh filename="package://robot_description/meshes/LEFTSIDE.STL"/>
             </geometry>
-            <material name="Blue_body"/>
+            <material name="Black_wheels"/>
         </visual>
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0" />
@@ -127,7 +128,7 @@
             <geometry>
                 <mesh filename="package://robot_description/meshes/FLANGE.STL"/>
             </geometry>
-            <material name="Blue_body"/>
+            <material name="Black_wheels"/>
         </visual>
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0" />
@@ -139,8 +140,8 @@
             <mass value="4.55743149884064" />
             <origin xyz="0 0 0" />
             <inertia ixx="0.224259288011278" ixy="0.0000146668870126123" ixz="-0.00000045139077650599" 
-                     iyy="0.0" iyz="-6.30334977764897E-016"
-                     izz="0.0" />
+                     iyy="0.572824908778646" iyz="-6.30334977764897E-016"
+                     izz="0.352922362443128" />
         </inertial>
     </link>
 
@@ -161,9 +162,9 @@
         <inertial>
             <mass value="4.55743149884064" />
             <origin xyz="0 0 0" />
-            <inertia ixx="0.224259288011278" ixy="0.0000146668870126123" ixz="-0.00000045139077650599" 
-                     iyy="0.0" iyz="-6.30334977764897E-016"
-                     izz="0.0" />
+            <inertia ixx="0.172811693426198" ixy="0.000287772429697471" ixz="0.000146852915258599" 
+                     iyy="0.329853029043022" iyz="-0.0000005106111186954"
+                     izz="0.502514023614247" />
         </inertial>
     </link>
 

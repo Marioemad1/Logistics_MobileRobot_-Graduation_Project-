@@ -13,6 +13,10 @@ find_library(LGPIO_LIBRARY lgpio)
 find_package(rclcpp_lifecycle REQUIRED)
 find_package(hardware_interface REQUIRED)
 find_package(pluginlib REQUIRED)
+find_package(Threads REQUIRED)
+
+
+
 if(NOT LGPIO_LIBRARY)
   message(FATAL_ERROR "lgpio library not found! Install liblgpio-dev")
 endif()
@@ -28,15 +32,26 @@ target_link_libraries(ultrasonic_sensor ${LGPIO_LIBRARY})
 
 include_directories(include)
 
+
+
 add_library(
   ${PROJECT_NAME}
   SHARED
   src/mpu6050_hardware_interface.cpp
+  src/mobile_base_hardware_interface.cpp
+  src/led_hardware_interface.cpp
 )
 
-ament_target_dependencies(${PROJECT_NAME} rclcpp rclcpp_lifecycle hardware_interface pluginlib )
+ament_target_dependencies(${PROJECT_NAME} rclcpp rclcpp_lifecycle hardware_interface pluginlib)
+target_link_libraries(${PROJECT_NAME} serial)
 
-pluginlib_export_plugin_description_file(hardware_interface mpu6050_hardware_interface.xml)
+pluginlib_export_plugin_description_file(hardware_interface hw_interface.xml)
+
+install(
+  FILES
+  hw_interface.xml
+  DESTINATION share/${PROJECT_NAME}
+)
 
 install(TARGETS ${PROJECT_NAME}
 #don't forget to add the nodes in the targets

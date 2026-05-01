@@ -1,0 +1,218 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!--chassis -->
+    <gazebo reference="base_link">
+        <material>Gazebo/Black</material>
+    </gazebo>
+
+    <gazebo reference="front_side_link">
+        <material>Gazebo/Grey</material>
+    </gazebo>
+
+    <gazebo reference="back_side_link">
+        <material>Gazebo/Grey</material>
+    </gazebo>
+
+    <gazebo reference="right_side_link">
+        <material>Gazebo/Black</material>
+    </gazebo>
+
+    <gazebo reference="left_side_link">
+        <material>Gazebo/Black</material>
+    </gazebo>
+
+    <gazebo reference="flange_link">
+        <material>Gazebo/Black</material>
+    </gazebo>
+
+    <gazebo reference="top_lift_link">
+        <material>Gazebo/Grey</material>
+    </gazebo>
+
+    <!-- wheels -->
+    <gazebo reference="right_wheel_link">
+        <material>Gazebo/Black</material>
+    </gazebo>
+
+    <gazebo reference="left_wheel_link">
+        <material>Gazebo/Black</material>
+    </gazebo>
+
+    <gazebo reference="front_caster_wheel_link">
+        <material>Gazebo/Black</material>
+    </gazebo>
+
+    <gazebo reference="back_caster_wheel_link">
+        <material>Gazebo/Black</material>
+    </gazebo>
+
+    <gazebo reference="scan_link">
+        <material>Gazebo/Grey</material>
+    </gazebo>
+
+    <gazebo reference="Camera_link">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+
+    <gazebo reference="ultra1_link">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+
+    <gazebo reference="ultra2_link">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+
+    <gazebo reference="ultra3_link">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+
+    <gazebo reference="ultra4_link">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+    
+
+
+    <gazebo>
+         <plugin name="gazebo_ros_diff_drive" filename="libgazebo_ros_diff_drive.so">
+
+            <!-- Update rate in Hz -->
+            <update_rate>50</update_rate>
+
+            <!-- wheels -->
+            <left_joint>base_left_wheel_joint</left_joint>
+            <right_joint>base_right_wheel_joint</right_joint>
+
+            <!-- kinematics -->
+            <wheel_separation>0.45</wheel_separation>
+            <wheel_diameter>0.2</wheel_diameter>
+
+            <!-- output -->
+            <publish_odom>true</publish_odom>
+            <publish_odom_tf>true</publish_odom_tf>
+            <publish_wheel_tf>true</publish_wheel_tf>
+
+            <odometry_topic>odom</odometry_topic>
+            <odometry_frame>odom</odometry_frame>
+            <robot_base_frame>base_footprint</robot_base_frame>
+        </plugin>
+    </gazebo>
+
+
+    <gazebo reference="front_caster_wheel_link">
+        <mu1 value="0.1"/>
+        <mu2 value="0.1"/>
+    </gazebo>
+
+    <gazebo reference="back_caster_wheel_link">
+        <mu1 value="0.1"/>
+        <mu2 value="0.1"/>
+    </gazebo>
+    
+
+    <plugin name="my_ray_sensor_plugin" filename="libgazebo_ros_ray_sensor.so">
+      <ros>
+        <!-- Configure namespace and remap to publish to /ray/pointcloud2 -->
+        <namespace>/ray</namespace>
+        <remapping>~/out:=pointcloud2</remapping>
+      </ros>
+      <!-- Output as a PointCloud2, see above for other types -->
+      <output_type>sensor_msgs/PointCloud2</output_type>
+      <!-- Clip intensity values so all are above 100, optional -->
+      <min_intensity>100.0</min_intensity>
+      <!-- Frame id for header of output, defaults to sensor's parent link name -->
+      <frame_name>ray_link</frame_name>
+    </plugin>
+
+
+    <!-- Your existing lidar_link and joint stay the same -->
+
+<!-- Now attach the actual ray sensor to the lidar_link -->
+    <gazebo reference="scan_link">
+        <sensor name="my_lidar_sensor" type="gpu_ray">  <!-- or type="ray" if no GPU -->
+          <always_on>true</always_on>
+          <update_rate>20</update_rate>           <!-- scans per second -->
+          <visualize>true</visualize>             <!-- see the rays in Gazebo GUI -->
+        
+          <!-- Ray parameters (required for the sensor) -->
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>360</samples>
+                <resolution>1</resolution>
+                <min_angle>0.5235987756</min_angle>   <!-- full 360° -->
+                <max_angle>2.949606436</max_angle>
+              </horizontal>
+            </scan>
+            <range>
+              <min>0.12</min>                     <!-- min distance -->
+              <max>5.0</max>                     <!-- max distance -->
+              <resolution>0.01</resolution>
+            </range>
+          </ray>
+      
+          <!-- Now paste your edited plugin here (nested inside the <sensor>) -->
+          <plugin name="my_ray_sensor_plugin" filename="libgazebo_ros_ray_sensor.so">
+            <ros>
+              <namespace>/ray</namespace>
+              <remapping>~/out:=scan</remapping>
+            </ros>
+            <output_type>sensor_msgs/LaserScan</output_type>
+            <min_intensity>100.0</min_intensity>
+            <frame_name>scan_link</frame_name>   <!-- changed to match your link name -->
+          </plugin>
+        </sensor>
+    </gazebo>
+
+
+    <gazebo reference="Camera_link">
+        <sensor name="camera_sensor" type="camera">
+          <always_on>true</always_on>
+          <update_rate>30</update_rate>           <!-- frames per second - adjust as needed -->
+          <visualize>true</visualize>             <!-- see camera frustum in Gazebo -->
+
+          <camera>
+            <!-- Basic camera intrinsics - tune these to match your real camera if needed -->
+            <horizontal_fov>-0.87266</horizontal_fov>  <!-- ~60° FOV - common value -->
+            <image>
+              <width>640</width>
+              <height>480</height>
+              <format>R8G8B8</format>               <!-- RGB - or L_INT8 for grayscale -->
+            </image>
+            <clip>
+              <near>0.05</near>
+              <far>100</far>
+            </clip>
+          </camera>
+
+          <!-- Your original plugin - pasted and slightly adjusted -->
+          <plugin name="my_camera_plugin" filename="libgazebo_ros_camera.so">
+            <ros>
+              <!-- Optional namespace - remove or change if you want global topics -->
+              <namespace>/camera</namespace>
+
+              <!-- Remap to standard ROS camera topics -->
+              <remapping>image_raw:=image_raw</remapping>
+              <remapping>camera_info:=camera_info</remapping>
+              <!-- <remapping>image_trigger:=trigger</remapping> --> <!-- only if using triggered mode -->
+            </ros>
+
+            <!-- Camera name used in CameraInfo and diagnostics -->
+            <camera_name>front_camera</camera_name>
+
+            <!-- Frame ID - must match your link name -->
+            <frame_name>Camera_link</frame_name>
+
+            <!-- Your original settings (keep or remove as needed) -->
+            <triggered>false</triggered>          <!-- continuous publishing by default -->
+            <P_cx>0</P_cx>
+            <P_cy>240.0</P_cy>                    <!-- cx = width/2 for 640×480 -->
+            <P_fy>0</P_fy>                        <!-- usually same as fx -->
+            <Tx>0.0</Tx>
+            <Ty>0.0</Ty>
+            <hack_baseline>0.0</hack_baseline>
+            <!-- rectification_matrix if needed for stereo simulation -->
+          </plugin>
+        </sensor>
+    </gazebo>
+</robot>

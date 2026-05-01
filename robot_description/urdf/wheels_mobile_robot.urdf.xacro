@@ -12,7 +12,7 @@
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-                <cylinder radius="0.0" length="0.0"/>
+                <cylinder radius="0.05" length="0.03"/>
             </geometry>
         </collision>
         <inertial>
@@ -35,7 +35,7 @@
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-                <cylinder radius="0.0" length="0.0"/>
+                <cylinder radius="0.05" length="0.03"/>
             </geometry>
         </collision>
         <inertial>
@@ -62,6 +62,8 @@
                 <sphere radius="0.0079275"/>
             </geometry>
         </collision>
+        <xacro:sphere_inertia m="2.5" r="${0.0079275/2.0}"
+                              xyz="0 0 0" rpy="0 0 0"  />
     </link>
 
     <link name="back_caster_wheel_link">
@@ -78,6 +80,8 @@
                 <sphere radius="0.0079275"/>
             </geometry>
         </collision>
+        <xacro:sphere_inertia m="2.5" r="${0.0079275/2.0}"
+                              xyz="0 0 0" rpy="0 0 0"  />
     </link>
 
 

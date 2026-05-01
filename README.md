@@ -1,2 +1,0 @@
-# Autonomous Mobile Robot for Efficient Factory Logistics
-The primary outcome of this project will be the development of a fully functional autonomous mobile robot that can operate reliably in a warehouse or factory environment. The robot is expected to navigate its surroundings independently, identify and avoid obstacles, and follow predetermined routes for transporting objects. Through this functionality, the project aims to demonstrate how automation can reduce dependency on manual labor in material handling tasks, thereby improving both efficiency and workplace safety.

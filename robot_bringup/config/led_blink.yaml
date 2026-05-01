@@ -1,0 +1,12 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 10 # 10 Hz is plenty fast for blinking an LED
+    
+    led_controller:
+      type: forward_command_controller/ForwardCommandController
+
+led_controller:
+  ros__parameters:
+    joints:
+      - base_esp_joint
+    interface_name: state

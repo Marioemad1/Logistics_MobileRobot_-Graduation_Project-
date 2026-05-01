@@ -5,6 +5,7 @@
     <xacro:include filename="chassis.urdf.xacro"/>
     <xacro:include filename="wheels_mobile_robot.urdf.xacro"/>
     <xacro:include filename="sensors.urdf.xacro"/>
-    
+    <!-- <xacro:include filename="gazebo.urdf.xacro" /> -->
+     <xacro:include filename="ros2_control.urdf.xacro" />
     
 </robot>
