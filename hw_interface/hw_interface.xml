@@ -7,6 +7,14 @@
         </description>
     </class>
 
+    <class name="nema_lift_hardware_interface/NemaLiftHardwareInterface"
+           type="nema_lift_hardware_interface::NemaLiftHardwareInterface"
+           base_class_type="hardware_interface::SystemInterface">
+        <description>
+            hardware of the nema23
+        </description>
+    </class>
+
     <!-- <class name="mpu6050_hardware/Mpu6050HardwareInterface"
            type="mpu6050_hardware::Mpu6050HardwareInterface"
            base_class_type="hardware_interface::SystemInterface">

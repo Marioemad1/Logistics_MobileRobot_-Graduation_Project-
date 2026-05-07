@@ -34,16 +34,16 @@
 
 
     
-    <!-- <ros2_control name="LedSystem" type="system">
+    <ros2_control name="NemaSystem" type="system">
         <hardware>
-            <plugin>led_blink_test/LedBlinkTest</plugin> 
+            <plugin>nema_lift_hardware_interface/NemaLiftHardwareInterface</plugin> 
         </hardware>
 
         <joint name="base_esp_joint">
             <command_interface name="state"/>
             <state_interface name="state"/>
         </joint>
-    </ros2_control> -->
+    </ros2_control>
 
 
     

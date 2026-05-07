@@ -1,14 +1,13 @@
-#ifndef MOBILE_BASE_HARDWARE_INTERFACE_HPP
-#define MOBILE_BASE_HARDWARE_INTERFACE_HPP
+#ifndef NEMA_LIFT_HARDWARE_INTERFACE_HPP
+#define NEMA_LIFT_HARDWARE_INTERFACE_HPP
 
 #include "hardware_interface/system_interface.hpp"
 #include <libserial/SerialPort.h>
 
-
-namespace mobile_base_hardware
+namespace nema_lift_hardware_interface
 {
 
-class MobileBaseHardWare : public hardware_interface::SystemInterface
+class NemaLiftHardwareInterface : public hardware_interface::SystemInterface
 {
 public:
 
@@ -43,18 +42,13 @@ private:
 
     std::string port_;
 
-    double hw_left_position_  = 0.0;
-    double hw_left_velocity_  = 0.0;
-    double hw_right_position_ = 0.0;
-    double hw_right_velocity_ = 0.0;
 
-    double cmd_left_velocity_  = 0.0;
-    double cmd_right_velocity_ = 0.0;
-
+    double read_state;
+    double write_state;
 
 }; //class
 
-} //namespace mobile base hardware 
+} //namespace
 
 
 

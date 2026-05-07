@@ -40,6 +40,7 @@ add_library(
   src/mpu6050_hardware_interface.cpp
   src/mobile_base_hardware_interface.cpp
   src/led_hardware_interface.cpp
+  src/nema_lift_hardware_interface.cpp
 )
 
 ament_target_dependencies(${PROJECT_NAME} rclcpp rclcpp_lifecycle hardware_interface pluginlib)

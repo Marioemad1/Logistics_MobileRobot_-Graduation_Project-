@@ -6,7 +6,10 @@ controller_manager:
       type: joint_state_broadcaster/JointStateBroadcaster
 
     diff_drive_controller:
-      type: diff_drive_controller/DiffDriveController 
+      type: diff_drive_controller/DiffDriveController
+
+    Nema_controller:
+      type: forward_command_controller/ForwardCommandController 
 
 diff_drive_controller:
   ros__parameters:
@@ -35,3 +38,10 @@ diff_drive_controller:
     angular.z.max_velocity: 1.0
     angular.z.min_velocity: -1.0
 
+
+
+Nema_controller:
+  ros__parameters:
+    joints:
+      - base_esp_joint
+    interface_name: state
