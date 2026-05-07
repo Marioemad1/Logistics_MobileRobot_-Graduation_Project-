@@ -23,7 +23,7 @@ void DRI_riseup(void)//rise up
 
 	//FIRST LETS SET THE DIRECTION TO CLOCKWISE
 	digitalWrite(DIR_PIN,HIGH);//CLK WISE
-	delayMicroseconds(5);//must to wait a 5 micro seconds for the driver to understand
+	delayMicroseconds(10);//must to wait a 5 micro seconds for the driver to understand
 	DRI_PWM();
 
 } 
@@ -34,7 +34,7 @@ void DRI_falldown(void)// fall down
 
 	//FIRST LETS SET THE DIRECTION TO CONTERCLOCKWISE
 	digitalWrite(DIR_PIN,LOW);//CONTERCLK WISE
-	delayMicroseconds(5);//must to wait a 5 micro seconds for the driver to understand
+	delayMicroseconds(10);//must to wait a 5 micro seconds for the driver to understand
 	DRI_PWM();
 
 }
@@ -42,17 +42,25 @@ void DRI_falldown(void)// fall down
 
 void DRI_PWM(void)
 {
-	int check=0;
+	
+	int moving_steps = 3;
 
-	while(DRI_STEPS>check)//this loop will run in the amount of the steps number
+
+	for (int i = 0 ; i < moving_steps; i++)
 	{
-		//LOW THE POWERSCREW
-		digitalWrite(PUL_PIN,HIGH);
-		delayMicroseconds(DRI_ON_TIME);
-		digitalWrite(PUL_PIN,LOW);
-		delayMicroseconds(DRI_OFF_TIME);
-		check++;
+		int check=0;
 
-		delayMicroseconds(2000);//change this number from 2000 --> 4000
+		while(DRI_STEPS>check)//this loop will run in the amount of the steps number
+		{
+			//LOW THE POWERSCREW
+
+			digitalWrite(PUL_PIN,HIGH);
+			delayMicroseconds(DRI_ON_TIME);
+			digitalWrite(PUL_PIN,LOW);
+			delayMicroseconds(DRI_OFF_TIME);
+			check++;
+
+			vTaskDelay(2 / portTICK_PERIOD_MS);//change this number from 2000 --> 4000
+		}
 	}
 }
