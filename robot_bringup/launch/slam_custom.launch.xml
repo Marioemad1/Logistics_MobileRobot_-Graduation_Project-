@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <arg name="use_sim_time" default="false"/>
+
+  <arg
+    name="params_file"
+    default="$(find-pkg-share robot_bringup)/config/slam_toolbox.yaml"/>
+
+  
+
+  <include file="$(find-pkg-share slam_toolbox)/launch/online_async_launch.py">
+
+    <arg name="slam_params_file" value="$(var params_file)"/>
+    <arg name="use_sim_time" value="$(var use_sim_time)"/>
+
+  </include>
+
+</launch>

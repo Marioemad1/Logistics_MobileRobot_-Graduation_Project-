@@ -1,0 +1,30 @@
+teleop_twist_joy_node:
+  ros__parameters:
+    require_enable_button: true
+
+    # Usually R1 on PS5. Confirm with /joy echo.
+    enable_button: 5
+
+    # Left stick vertical controls forward/backward.
+    axis_linear:
+      x: 1
+
+    # Left stick horizontal or right stick horizontal controls rotation.
+    axis_angular:
+      yaw: 0
+
+    # Safe slow speed for first test.
+    scale_linear:
+      x: 0.20
+
+    scale_angular:
+      yaw: 0.60
+
+    # Optional faster mode, usually L1.
+    enable_turbo_button: 4
+
+    scale_linear_turbo:
+      x: 0.35
+
+    scale_angular_turbo:
+      yaw: 1.0

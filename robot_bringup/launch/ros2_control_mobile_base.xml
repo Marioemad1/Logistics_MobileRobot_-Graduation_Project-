@@ -11,14 +11,25 @@
     <node pkg="controller_manager" exec="ros2_control_node">
         <param from="$(find-pkg-share robot_bringup)/config/my_robot_controllers.yaml"/>
         <remap from="/controller_manager/robot_description" to="/robot_description"/>
+        <remap from="/diff_drive_controller/cmd_vel_unstamped" to="/cmd_vel"/>
+        <!--<remap from="/diff_drive_controller/cmd_vel_stamped" to="/cmd_vel"/>-->
+        
+        
     </node>
+
+    <node pkg="controller_manager" exec="spawner" args="joint_state_broadcaster"/>
 
     <node pkg="controller_manager" exec="spawner" args="diff_drive_controller" />
 
     <node pkg="controller_manager" exec="spawner" args="Nema_controller" />
+
+    
     
 
-    <node pkg="rviz2" exec= "rviz2" output="screen" args="-d $(find-pkg-share robot_description)/rviz2/default.rviz" />
+    <!--<node pkg="controller_manager" exec="spawner" args="imu_broadcaster" />-->
+    
 
+  <node pkg="rviz2" exec= "rviz2" output="screen" args="-d $(find-pkg-share robot_description)/rviz2/default.rviz" />
+    <!--<node pkg="rviz2" exec= "rviz2"/>-->
 
 </launch>

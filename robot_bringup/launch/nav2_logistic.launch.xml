@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <arg name="use_sim_time" default="false"/>
+
+  <arg
+    name="map"
+    default="$(find-pkg-share robot_bringup)/maps/final_map.yaml"/>
+
+
+  <arg
+    name="params_file"
+    default="$(find-pkg-share robot_bringup)/config/logi.yaml"/>
+
+  <arg name="autostart" default="true"/>
+
+  <include file="$(find-pkg-share nav2_bringup)/launch/bringup_launch.py">
+
+    <arg name="slam" value="False"/>
+
+    <arg name="map" value="$(var map)"/>
+    <arg name="params_file" value="$(var params_file)"/>
+    <arg name="use_sim_time" value="$(var use_sim_time)"/>
+    <arg name="autostart" value="$(var autostart)"/>
+
+    <arg name="use_composition" value="False"/>
+    <arg name="use_respawn" value="False"/>
+    <arg name="log_level" value="info"/>
+
+  </include>
+
+</launch>

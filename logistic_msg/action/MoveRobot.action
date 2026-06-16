@@ -1,0 +1,13 @@
+#----Goal----
+string action
+---
+#----Result----
+float64 pose_x
+float64 pose_y
+float64 theta
+string meassage
+---
+#----Feedback---
+float64 pose_x
+float64 pose_y
+float64 theta

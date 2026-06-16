@@ -14,7 +14,7 @@ hardware_interface::CallbackReturn MobileBaseHardWare::on_init
     }
 
     info_ = info;
-    port_ = "/dev/ttyUSB0";
+    port_ = "/dev/ttyACM0";
 
     cmd_left_velocity_  = 0.0;
     cmd_right_velocity_ = 0.0;
@@ -68,6 +68,15 @@ hardware_interface::CallbackReturn MobileBaseHardWare::on_configure
     if (shared_serial.port->IsOpen() != true )
     {
         shared_serial.port->Open(port_);
+
+        shared_serial.port->SetDTR(true);
+        shared_serial.port->SetRTS(false);
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
+        shared_serial.port->SetDTR(false);
+        shared_serial.port->SetRTS(false);
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+
     }
     return hardware_interface::CallbackReturn::SUCCESS;
 }
@@ -106,34 +115,16 @@ hardware_interface::return_type MobileBaseHardWare::read
 {
     (void)time;
     (void)period;
+
+    double dt = period.seconds();
+
     
-    auto& shared_serial = hw_interface::SharedSerialPort::getInstance();
+    hw_right_velocity_ = cmd_right_velocity_;
+    hw_left_velocity_  = cmd_left_velocity_;
 
-    std::lock_guard<std::mutex> lock(shared_serial.serial_mutex);
-    if (shared_serial.port->IsDataAvailable() == true)
-    {
-        std::string responce;
-        
-        try
-        {
-            shared_serial.port->ReadLine(responce, '\n', 100);
-            
-            // Clean up the string just like we did for the LED
-            if (!responce.empty() && responce.back() == '\r') {
-                responce.pop_back();
-            }
-
-            // We will add the string splitting logic (R:1.5,L:-0.5) here later!
-        }
-        catch(const LibSerial::ReadTimeout& e)
-        {
-            // CRITICAL: Catch the timeout silently so the robot doesn't crash!
-        }
-        catch(const std::exception& e)
-        {
-            /* RCLCPP_WARN(rclcpp::get_logger("MobileBaseHardWare"), "Ignored bad data from ESP32"); */
-        }
-    }
+    
+    hw_right_position_ += (hw_right_velocity_ * dt);
+    hw_left_position_  += (hw_left_velocity_ * dt);
 
     return hardware_interface::return_type::OK;
 

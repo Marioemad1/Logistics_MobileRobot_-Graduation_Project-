@@ -11,6 +11,9 @@ controller_manager:
     Nema_controller:
       type: forward_command_controller/ForwardCommandController 
 
+    #imu_broadcaster:
+      #type: imu_sensor_broadcaster/IMUSensorBroadcaster
+
 diff_drive_controller:
   ros__parameters:
     left_wheel_names: ["base_left_wheel_joint"]
@@ -19,7 +22,7 @@ diff_drive_controller:
     use_stamped_vel: false
 
     wheel_separation: 0.49
-    wheel_radius: 0.1
+    wheel_radius: 0.05
 
     odom_frame_id: "odom"
     base_frame_id: "base_footprint"
@@ -29,6 +32,8 @@ diff_drive_controller:
 
     enable_odom_tf: false
     publish_rate: 50.0 
+    position_feedback: false
+    open_loop: true
 
     linear.x.has_velocity_limits: true
     linear.x.max_velocity: 1.0
@@ -45,3 +50,8 @@ Nema_controller:
     joints:
       - base_esp_joint
     interface_name: state
+
+#imu_broadcaster:
+  #ros__parameters:
+    #sensor_name: imu_link     # must match URDF
+    #frame_id: base_link         # or imu_link

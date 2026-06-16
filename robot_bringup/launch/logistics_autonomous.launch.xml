@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- robot state publisher and ros2 control includes nema and wheel movement  -->
+    <include file="$(find-pkg-share robot_bringup)/launch/ros2_control_mobile_base.xml"/>
+    <!-- lidar launch file ro open the okdo lidar -->
+     <!-- don't forget to source the lidar ws before launch this launch file  -->
+    <include file="$(find-pkg-share ldlidar_stl_ros2)/launch/ld06_final.launch.py"/>
+    <!-- localization pkg -->
+    <include file="$(find-pkg-share robot_bringup)/launch/localization.lanch.xml"/>
+    <!-- nav2 bringup pkg -->
+    <include file="$(find-pkg-share robot_bringup)/launch/nav2_logistic.launch.xml"/>
+
+    <!-- action controller-->
+     <!--<node pkg="controller" exec="action_server_controller.py"  >
+        <param  name="initial_postion.x" value="0.0" />
+        <param  name="initial_postion.y" value="0.0" />
+        <param  name="initial_postion.theta" value="0.0" />
+     </node> -->
+     
+
+</launch>

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-    <!-- <ros2_control name="MPU6050" type="system">
+    <!--<ros2_control name="MPU6050" type="system">
         <hardware>
             <plugin>mpu6050_hardware/Mpu6050HardwareInterface</plugin>
         </hardware>
@@ -12,8 +12,12 @@
             <state_interface name="angular_velocity.x"/>
             <state_interface name="angular_velocity.y"/>
             <state_interface name="angular_velocity.z"/>
+            <state_interface name="orientation.x"/>
+            <state_interface name="orientation.y"/>
+            <state_interface name="orientation.z"/>
+            <state_interface name="orientation.w"/>
         </sensor>
-    </ros2_control> -->
+    </ros2_control>-->
 
     <ros2_control name="MobileBase" type="system">
         

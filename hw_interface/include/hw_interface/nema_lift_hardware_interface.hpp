@@ -3,6 +3,8 @@
 
 #include "hardware_interface/system_interface.hpp"
 #include <libserial/SerialPort.h>
+#include <thread>
+#include <chrono>
 
 namespace nema_lift_hardware_interface
 {
@@ -45,6 +47,7 @@ private:
 
     double read_state;
     double write_state;
+    double last_send_state;
 
 }; //class
 

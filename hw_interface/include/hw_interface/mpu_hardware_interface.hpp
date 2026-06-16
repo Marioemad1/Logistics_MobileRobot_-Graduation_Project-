@@ -50,6 +50,7 @@ private:
     // These are the variables the controller will read every cycle
     double linear_acceleration_[3] = {0.0, 0.0, 0.0};   // m/s²
     double angular_velocity_[3]    = {0.0, 0.0, 0.0};   // rad/s
+    double orientation_[4] = {0.0, 0.0, 0.0, 1.0};
 
 }; //class
 

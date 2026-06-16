@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<launch>
+    <let name = "ekf_yaml"
+         value ="$(find-pkg-share robot_bringup)/config/ekf.yaml"/>
+
+
+    <node pkg="rf2o_laser_odometry" exec="rf2o_laser_odometry_node"   output="screen">
+        <param name="laser_scan_topic" value="/scan"/>
+        <param name="odom_topic" value="/odom_rf2o"/>
+        <param name="publish_tf" value="true"/>  <!-- make this true only when test it alone -->
+        <param name="base_frame_id" value="base_footprint"/>
+        <param name="odom_frame_id" value="odom"/>
+        <param name="init_pose_from_topic" value=""/>
+        <param name="freq" value="10.0"/>
+    </node>
+
+    <!--<node pkg="robot_localization" exec="ekf_node"  output="screen">
+        <param from="$(var ekf_yaml)" />
+    </node>-->
+    
+
+    
+
+</launch>

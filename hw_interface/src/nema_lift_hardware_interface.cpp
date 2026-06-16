@@ -17,8 +17,8 @@ hardware_interface::CallbackReturn NemaLiftHardwareInterface::on_init
 
     read_state = 0.0;
     write_state= 0.0;
-
-    port_ = "/dev/ttyUSB0";
+    last_send_state = 999.0;
+    port_ = "/dev/ttyACM0";
 
     return hardware_interface::CallbackReturn::SUCCESS;
     
@@ -63,6 +63,13 @@ hardware_interface::CallbackReturn NemaLiftHardwareInterface::on_configure
     if (shared_serial.port->IsOpen() != true )
     {
         shared_serial.port->Open(port_);
+        shared_serial.port->SetDTR(true);
+        shared_serial.port->SetRTS(false);
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
+        shared_serial.port->SetDTR(false);
+        shared_serial.port->SetRTS(false);
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
     }
     return hardware_interface::CallbackReturn::SUCCESS;
 }
@@ -73,6 +80,7 @@ hardware_interface::CallbackReturn NemaLiftHardwareInterface::on_activate
 
     (void)previous_state;
     read_state = 0.0;
+    last_send_state = 999.0;
     auto& shared_serial = hw_interface::SharedSerialPort::getInstance();
 
     shared_serial.port->SetBaudRate(LibSerial::BaudRate::BAUD_115200);
@@ -122,7 +130,11 @@ hardware_interface::return_type NemaLiftHardwareInterface::read
 
             // Safety Step 2: Try to do the math
             if (!responce.empty()) {
-                read_state = std::stod(responce);
+
+                if(responce=="1" || responce=="-1")
+                {
+                    read_state = std::stod(responce);
+                }
             }
         }
         catch(const LibSerial::ReadTimeout& e)
@@ -146,13 +158,33 @@ hardware_interface::return_type NemaLiftHardwareInterface::write
 {
     (void)time;
     (void)period;
-    auto& shared_serial = hw_interface::SharedSerialPort::getInstance();
 
+    double requsted_command = 999.0;
+
+    auto& shared_serial = hw_interface::SharedSerialPort::getInstance();
     std::string command_ = "";
+
     if (write_state > 0.5) {
-        command_ = "N:1.0\n";
+        requsted_command = 1.0;
     } 
     else if(write_state < -0.5)
+    {
+        requsted_command = -1.0;
+    }
+    else
+    {
+       requsted_command = 0.0;
+    }
+
+    if (requsted_command == last_send_state)
+    {
+        return hardware_interface::return_type::OK;
+    }
+
+    if (requsted_command > 0.5) {
+        command_ = "N:1.0\n";
+    } 
+    else if(requsted_command < -0.5)
     {
         command_ = "N:-1.0\n";
     }
@@ -164,6 +196,8 @@ hardware_interface::return_type NemaLiftHardwareInterface::write
     std::lock_guard<std::mutex> lock(shared_serial.serial_mutex);
 
     shared_serial.port->Write(command_);
+
+    last_send_state = requsted_command ;
 
     shared_serial.port->DrainWriteBuffer();
 

@@ -3,10 +3,11 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/../build/**",
+                "${workspaceFolder}/build/**",
                 "/opt/ros/humble/include/**",
                 "/usr/include",
-                "/home/mary/logistic_ws/src/hw_interface/include/**"
+                "/home/mary/logistic_ws/src/hw_interface/include/**",
+                "/home/mary/logistic_ws/install/logistic_msg/include/**"
             ],
 
             "defines": [],

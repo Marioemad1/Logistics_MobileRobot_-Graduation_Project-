@@ -156,7 +156,7 @@
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-                <box size="0.0 0.0 0.0"/>
+                
             </geometry>
         </collision>
         <inertial>
@@ -165,6 +165,29 @@
             <inertia ixx="0.172811693426198" ixy="0.000287772429697471" ixz="0.000146852915258599" 
                      iyy="0.329853029043022" iyz="-0.0000005106111186954"
                      izz="0.502514023614247" />
+        </inertial>
+    </link>
+
+    <link name="lidarbase_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/meshes/liDAR_SPACER.STL"/>
+            </geometry>
+            <material name="Orange_body"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.0 0.0 0.0"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.044971" />
+            <origin xyz="0 0 0" />
+            <inertia ixx="0.000019021" ixy="-1.0558E-020" ixz="-0.0000096066"
+                     iyy="0.000053096" iyz="-6.5811E-021"
+                     izz="0.000065593" />
         </inertial>
     </link>
 
@@ -211,6 +234,13 @@
         <child link="top_lift_link"/>
         <origin xyz="0.0 0.0 0.2374" rpy="0.0 0.0 0.0"/>
     </joint>
+
+    <joint name="base_lidarbase_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="lidarbase_link"/>
+        <origin xyz="0.44615 0.0325 0.026" rpy="0.0 0.0 0.0"/>
+    </joint>
+    
     
 
 </robot>

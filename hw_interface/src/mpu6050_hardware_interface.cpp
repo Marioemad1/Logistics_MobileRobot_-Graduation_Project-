@@ -42,13 +42,27 @@ std::vector<hardware_interface::StateInterface> Mpu6050HardwareInterface::export
     //anguler acceleration
     states.emplace_back(
         hardware_interface::StateInterface(
-            sensor_name_link,"anguler_acceleration.x",&angular_velocity_[0]));
+            sensor_name_link,"angular_velocity.x",&angular_velocity_[0]));
     states.emplace_back(
             hardware_interface::StateInterface(
-                sensor_name_link,"anguler_acceleration.y",&angular_velocity_[1]));
+                sensor_name_link,"angular_velocity.y",&angular_velocity_[1]));
     states.emplace_back(
             hardware_interface::StateInterface(
-                sensor_name_link,"anguler_acceleration.z",&angular_velocity_[2]));
+                sensor_name_link,"angular_velocity.z",&angular_velocity_[2]));
+
+
+    states.emplace_back(
+        hardware_interface::StateInterface(
+            sensor_name_link, "orientation.x", &orientation_[0]));
+    states.emplace_back(
+        hardware_interface::StateInterface(
+            sensor_name_link, "orientation.y", &orientation_[1]));
+    states.emplace_back(
+        hardware_interface::StateInterface(
+            sensor_name_link, "orientation.z", &orientation_[2]));
+    states.emplace_back(
+        hardware_interface::StateInterface(
+            sensor_name_link, "orientation.w", &orientation_[3]));
 
     return states;
 
