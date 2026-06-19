@@ -3,8 +3,8 @@
 > A ROS 2 Humble autonomous logistics robot built for indoor navigation, station approach, cargo lifting, and future IoT / vision-assisted operation.
 
 <p align="center">
-  <img src="docs/images/robot_front.jpg" width="45%" alt="Robot front view placeholder" />
-  <img src="docs/images/robot_inside.jpg" width="45%" alt="Robot electronics placeholder" />
+  <img src="images/robot_front_view.png" width="45%" alt="Robot front view placeholder" />
+  <img src="images/inside_view.jpg" width="45%" alt="Robot electronics placeholder" />
 </p>
 
 <p align="center">
@@ -80,36 +80,38 @@ The robot was developed around a real physical platform, not only simulation. Be
 
 ## System Architecture
 
-```text
-                  +----------------------+
-                  |      User / UI       |
-                  | RViz, PS5, IoT, App  |
-                  +----------+-----------+
-                             |
-                             v
-+------------------+   +------------+   +--------------------+
-|  Map / AMCL      |-->|   Nav2     |-->| velocity_smoother  |
-|  SLAM / RF2O     |   | Planner +  |   | /cmd_vel_smoothed  |
-+------------------+   | Controller |   +---------+----------+
-                       +------------+             |
-                                                   v
-                                           +---------------+
-                                           | ros2_control  |
-                                           | controllers   |
-                                           +-------+-------+
-                                                   |
-                                                   v
-                                           +---------------+
-                                           | custom HW IF  |
-                                           | LibSerial     |
-                                           +-------+-------+
-                                                   |
-                                                   v
-                                           +---------------+
-                                           | ESP32 DevKit  |
-                                           | motors + lift |
-                                           +---------------+
+```mermaid
+architecture-beta
+
+    group interface(cloud)[User Interface Layer]
+    group navigation(cloud)[Navigation Localization Layer]
+    group control(server)[ROS2 Control Layer]
+    group embedded(server)[Embedded Hardware Layer]
+
+    service ui(internet)[RViz2 PS5 IoT App] in interface
+
+    service localization(database)[Map AMCL SLAM RF2O] in navigation
+    service nav2(server)[Nav2 Planner Controller] in navigation
+    service smoother(server)[Velocity Smoother] in navigation
+
+    service ros2control(server)[ROS2 Control Controllers] in control
+    service hardware(server)[Custom Hardware Interface LibSerial] in control
+
+    service esp32(server)[ESP32 DevKit] in embedded
+    service actuators(disk)[Drive Motors Lift Motor] in embedded
+
+    ui:B --> T:nav2
+
+    localization:R --> L:nav2
+    nav2:R --> L:smoother
+
+    smoother:B --> T:ros2control
+    ros2control:B --> T:hardware
+
+    hardware:B --> T:esp32
+    esp32:B --> T:actuators
 ```
+
 
 The navigation stack produces velocity commands. The velocity smoother limits acceleration and speed. The `diff_drive_controller` converts `/cmd_vel` into wheel joint velocity commands. The custom hardware interface converts those commands into serial messages for the ESP32.
 
