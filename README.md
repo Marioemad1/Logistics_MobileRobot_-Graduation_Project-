@@ -7,6 +7,8 @@
   <img src="images/inside_view.png" width="45%" alt="Robot electronics placeholder" />
 </p>
 
+https://github.com/user-attachments/assets/4f5d6dd3-665a-47e2-b4b6-8914b8b3f0d6
+
 ---
 
 ## Table of Contents
