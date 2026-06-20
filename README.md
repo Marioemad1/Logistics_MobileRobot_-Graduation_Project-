@@ -4,16 +4,8 @@
 
 <p align="center">
   <img src="images/robot_front_view.png" width="45%" alt="Robot front view placeholder" />
-  <img src="images/inside_view.jpg" width="45%" alt="Robot electronics placeholder" />
+  <img src="images/inside_view.png" width="45%" alt="Robot electronics placeholder" />
 </p>
-
-<p align="center">
-  <b>Demo Video:</b> <a href="docs/videos/navigation_demo.mp4">Navigation Test</a> |
-  <b>Demo Video:</b> <a href="docs/videos/station_demo.mp4">Station / Lift Test</a> |
-  <b>Demo Video:</b> <a href="docs/videos/mapping_demo.mp4">Mapping Test</a>
-</p>
-
-> Replace the image and video paths above with your real robot photos and demo videos after uploading them to the repository.
 
 ---
 
@@ -630,7 +622,18 @@ The original Nav2 configuration was too aggressive for this robot. It was retune
 
 This makes the robot safer around walls and less likely to rotate violently.
 
+
+### 9.PCB:
+<p align="center">
+  <img src="images/pcb1.png" width="33%" alt="pcb1" />
+  <img src="images/pcb2.png" width="33%" alt="pcb2" />
+  <img src="images/pcb3.png" width="33%" alt="pcb3" />
+</p>
+
 ---
+
+
+
 
 ## Installation
 
